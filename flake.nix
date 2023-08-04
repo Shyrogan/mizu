@@ -14,6 +14,11 @@
     impermanence.url = "github:nix-community/impermanence";
     # Nix colors
     nix-colors.url = "github:misterio77/nix-colors";
+    # HyperWM
+    hyprland-contrib = {
+      url = "github:hyprwm/contrib";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { self, nixpkgs, nix-colors, ... }@inputs:

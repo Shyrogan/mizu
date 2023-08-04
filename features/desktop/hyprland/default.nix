@@ -1,5 +1,10 @@
-{ lib, config, ... }:
+{ inputs, lib, config, pkgs, ... }:
 {
+  home.packages = with pkgs; [
+    swaybg
+    grim
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
@@ -26,7 +31,13 @@
         rounding = 7;
       };
 
-      bind = [
+      exec = [
+        "${pkgs.swaybg}/bin/swaybg -i /persist/home/sebastien/Pictures/wallpaper.png --mode fill"
+      ];
+
+      bind = let
+        grimblast = "grimblast";
+      in [
         # Basic stuff
         "SUPER, Return,  exec, ${config.home.sessionVariables.TERMINAL}"
         "SUPER, B,       exec, qutebrowser"
@@ -63,6 +74,13 @@
         "SUPER SHIFT, 8, movetoworkspace, 8"
         "SUPER SHIFT, 9, movetoworkspace, 9"
         "SUPER SHIFT, 0, movetoworkspace, 10"
+
+        # Screenshots
+        ",Print,exec,${grimblast} --notify copy output"
+        "SHIFT,Print,exec,${grimblast} --notify copy active"
+        "CONTROL,Print,exec,${grimblast} --notify copy screen"
+        "SUPER,Print,exec,${grimblast} --notify copy window"
+        "ALT,Print,exec,${grimblast} --notify copy area"
       ];
 
       bindm = [
