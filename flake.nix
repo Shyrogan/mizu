@@ -21,6 +21,8 @@
     };
     # Spicetify
     spicetify-nix.url = github:the-argus/spicetify-nix;
+    # Discord
+    replugged-nix-flake.url = "github:LunNova/replugged-nix-flake";
   };
 
   outputs = { self, nixpkgs, nix-colors, ... }@inputs:

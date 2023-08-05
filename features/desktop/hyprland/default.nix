@@ -45,16 +45,12 @@
         "${pkgs.swaybg}/bin/swaybg -i /persist/home/sebastien/Pictures/wallpaper.png --mode fill"
       ];
 
-      layerrule = [
-        "blur,wofi"
-        "blur,notifications"
-      ];
-
       bind =
         let
           grimblast = "grimblast";
           makoctl = "${config.services.mako.package}/bin/makoctl";
           wofi = "${config.programs.wofi.package}/bin/wofi";
+          playerctl = "${config.services.playerctld.package}/bin/playerctl";
         in
         [
           # Basic stuff
@@ -100,7 +96,14 @@
           "CONTROL,Print,exec,${grimblast} --notify copy screen"
           "SUPER,Print,exec,${grimblast} --notify copy window"
           "ALT,Print,exec,${grimblast} --notify copy area"
-        ] ++ # Notification manager
+        ] ++
+        (lib.optionals config.services.playerctld.enable [
+          # Media control
+          ",XF86AudioNext,exec,${playerctl} next"
+          ",XF86AudioPrev,exec,${playerctl} previous"
+          ",XF86AudioPlay,exec,${playerctl} play-pause"
+          ",XF86AudioStop,exec,${playerctl} stop"
+        ]) ++ # Notification manager
         (lib.optionals config.services.mako.enable [
           "SUPER,w,exec,${makoctl} dismiss"
         ]) ++

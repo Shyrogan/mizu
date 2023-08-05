@@ -1,6 +1,10 @@
 { config, ... }:
 let inherit (config.colorscheme) colors kind;
 in {
+  wayland.windowManager.hyprland.settings.layerrule = [
+    "blur,notifications"
+  ];
+
   services.mako = {
     enable = true;
     font = "${config.fontProfiles.regular.family} 12";

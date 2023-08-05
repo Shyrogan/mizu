@@ -1,6 +1,10 @@
 { nix-colors, config, lib, pkgs, ... }:
 let inherit (config.colorscheme) colors kind;
 in {
+  wayland.windowManager.hyprland.settings.layerrule = [
+    "blur,wofi"
+  ];
+
   programs.wofi = {
     enable = true;
     package = pkgs.wofi;

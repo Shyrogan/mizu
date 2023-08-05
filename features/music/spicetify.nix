@@ -8,6 +8,10 @@ in
     inputs.spicetify-nix.homeManagerModule
   ];
 
+  wayland.windowManager.hyprland.settings.windowrule = [
+    "opacity 0.85 0.85, ^(Spotify)$"
+  ];
+
   programs.spicetify = {
     enable = true;
 
