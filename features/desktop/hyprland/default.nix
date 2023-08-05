@@ -102,8 +102,7 @@
 
         # Launcher
         (lib.optionals config.programs.wofi.enable [
-          "SUPER,x,exec,${wofi} -S drun -x 10 -y 10 -W 25% -H 60%"
-          "SUPER,d,exec,${wofi} -S run"
+          "SUPER,Space,exec,${wofi} -S drun"
         ]);
 
       bindm = [
