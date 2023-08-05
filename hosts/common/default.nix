@@ -6,6 +6,7 @@
     ./nix.nix
     ./opengl.nix
     ./pulseaudio.nix
+    ./wev.nix
     ./zen.nix
   ];
 }

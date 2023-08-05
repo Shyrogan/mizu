@@ -11,11 +11,12 @@ in {
     anchor = "bottom-right";
     width = 300;
     height = 100;
-    borderSize = 2;
+    borderSize = 1;
     defaultTimeout = 5000;
     backgroundColor = "#${colors.base00}55";
     borderColor = "#${colors.base02}dd";
     textColor = "#${colors.base05}dd";
     margin = "0";
+    borderRadius = 8;
   };
 }
