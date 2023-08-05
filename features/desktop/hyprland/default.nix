@@ -5,6 +5,11 @@
     grim
     inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
   ];
+  programs.nushell.loginFile.text = ''
+  if (tty) == "/dev/tty1" {
+    exec Hyprland
+  }
+  '';
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {

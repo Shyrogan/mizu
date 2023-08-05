@@ -14,6 +14,7 @@
       height = 1440;
       x = 1920;
       primary = true;
+      refreshRate = 144;
     }
     {
       name = "HDMI-A-1";
