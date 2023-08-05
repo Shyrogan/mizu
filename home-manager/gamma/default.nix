@@ -6,6 +6,7 @@
     ../../user/sebastien/home.nix
     ../../features/desktop/hyprland
     ../../features/desktop
+    ../../features/desktop/programming
   ];
   monitors = [
     {
