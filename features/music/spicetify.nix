@@ -22,6 +22,7 @@ in
     ];
 
     colorScheme = "custom";
+    # TODO: Replace with NixOS colors
     customColorScheme = {
       text = "a9b1d6";
       subtext = "c0caf5";

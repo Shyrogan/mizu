@@ -7,7 +7,7 @@
     ./opengl.nix
     ./pipewire.nix
     ./pulseaudio.nix
-    ./wev.nixdg
+    ./wev.nix
     ./zen.nix
   ];
 }

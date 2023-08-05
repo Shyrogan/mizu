@@ -7,5 +7,6 @@
     ./pavucontrol.nix
     ./playerctl.nix
     ./qutebrowser.nix
+    ./slack.nix
   ];
 }
