@@ -14,7 +14,7 @@
         * {
           font-family: ${config.fontProfiles.regular.family};
         }
-      ''
-        };
+      '';
     };
-  }
+  };
+}
