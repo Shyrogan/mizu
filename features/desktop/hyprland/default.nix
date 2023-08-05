@@ -3,6 +3,7 @@
   imports = [
     ./launcher/wofi.nix
     ./notification/mako.nix
+    ./bar/waybar.nix
   ];
   home.packages = with pkgs;
     [

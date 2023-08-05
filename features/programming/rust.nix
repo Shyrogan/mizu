@@ -6,5 +6,6 @@
     rustc
     rustfmt
     rust-analyzer
+    gcc
   ];
 }
