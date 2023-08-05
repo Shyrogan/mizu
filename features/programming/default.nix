@@ -1,6 +1,8 @@
 {
   imports = [
-    ./nix.nix
-    ./typescript.nix
+    ./formatter/nix.nix
+    
+    ./lsp/nix.nix
+    ./lsp/typescript.nix
   ];
 }
