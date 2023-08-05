@@ -32,6 +32,7 @@
           "Pictures"
           "Videos"
           ".local/bin"
+          ".mizu"
         ];
         allowOther = true;
       };
