@@ -10,6 +10,11 @@
       run-always_parse_args = true;
       run-cache_file = "/dev/null";
       run-exec_search = true;
+      style = ''
+        * {
+          font-family: ${config.fontProfiles.regular.family};
+        }
+      ''
+        };
     };
-  };
-}
+  }
