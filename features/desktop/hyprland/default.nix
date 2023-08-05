@@ -48,6 +48,8 @@
       bind =
         let
           grimblast = "grimblast";
+          makoctl = "${config.services.mako.package}/bin/makoctl";
+          wofi = "${config.programs.wofi.package}/bin/wofi";
         in
         [
           # Basic stuff
@@ -102,11 +104,7 @@
         (lib.optionals config.programs.wofi.enable [
           "SUPER,x,exec,${wofi} -S drun -x 10 -y 10 -W 25% -H 60%"
           "SUPER,d,exec,${wofi} -S run"
-        ] ++ (lib.optionals config.programs.password-store.enable [
-          ",Scroll_Lock,exec,${pass-wofi}" # fn+k
-          ",XF86Calculator,exec,${pass-wofi}" # fn+f12
-          "SUPER,semicolon,exec,pass-wofi"
-        ]));
+        ]);
 
       bindm = [
         "SUPER,mouse:273, resizewindow"
