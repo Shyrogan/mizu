@@ -20,7 +20,6 @@ in
       editor.command = [ "xdg-open" "{file}" ];
       tabs = {
         show = "multiple";
-        tree_tabs = true;
       };
       fonts = {
         default_family = config.fontProfiles.regular.family;

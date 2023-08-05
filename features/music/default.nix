@@ -1,4 +1,6 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [ spotify ];
+  imports = [
+    ./spicetify.nix
+  ];
 }

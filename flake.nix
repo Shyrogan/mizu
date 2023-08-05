@@ -19,6 +19,8 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Spicetify
+    spicetify-nix.url = github:the-argus/spicetify-nix;
   };
 
   outputs = { self, nixpkgs, nix-colors, ... }@inputs:

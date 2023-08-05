@@ -45,6 +45,11 @@
         "${pkgs.swaybg}/bin/swaybg -i /persist/home/sebastien/Pictures/wallpaper.png --mode fill"
       ];
 
+      layerrule = [
+        "blur,wofi"
+        "blur,notifications"
+      ];
+
       bind =
         let
           grimblast = "grimblast";
