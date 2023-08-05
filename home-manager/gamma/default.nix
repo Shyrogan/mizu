@@ -7,6 +7,7 @@
     ../../features/desktop/hyprland
     ../../features/desktop
     ../../features/programming
+    ../../features/music
   ];
   monitors = [
     {

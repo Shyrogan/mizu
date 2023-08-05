@@ -1,14 +1,10 @@
-{ inputs, pkgs }:
+{ inputs, pkgs, ... }:
 {
-  nixpkgs.overlays = [ fenix.overlays.default ];
-  home.pakcages = with pkgs; [
-    (fenix.complete.withComponents [
-      "cargo"
-      "clippy"
-      "rust-src"
-      "rustc"
-      "rustfmt"
-    ])
-    rust-analyzer-nightly
+  home.packages = with pkgs; [
+    cargo
+    clippy
+    rustc
+    rustfmt
+    rust-analyzer
   ];
 }

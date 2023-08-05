@@ -1,8 +1,8 @@
 { inputs, lib, config, pkgs, ... }:
 {
   imports = [
-    ../launcher/wofi.nix
-    ../notification/mako.nix
+    ./launcher/wofi.nix
+    ./notification/mako.nix
   ];
   home.packages = with pkgs;
     [
