@@ -1,7 +1,31 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
+let
+  cat = "${pkgs.coreutils}/bin/cat";
+  pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
+  playerctl = "${pkgs.playerctl}/bin/playerctl";
+  jq = "${pkgs.jq}/bin/jq";
+  grep = "${pkgs.gnugrep}/bin/grep";
+  cut = "${pkgs.coreutils}/bin/cut";
+  wofi = "${pkgs.wofi}/bin/wofi";
+
+  jsonOutput = name: { pre ? "", text ? "", tooltip ? "", alt ? "", class ? "", percentage ? "" }: "${pkgs.writeShellScriptBin "waybar-${name}" ''
+    set -euo pipefail
+    ${pre}
+    ${jq} -cn \
+      --arg text "${text}" \
+      --arg tooltip "${tooltip}" \
+      --arg alt "${alt}" \
+      --arg class "${class}" \
+      --arg percentage "${percentage}" \
+      '{text:$text,tooltip:$tooltip,alt:$alt,class:$class,percentage:$percentage}'
+  ''}/bin/waybar-${name}";
+in
 {
   programs.waybar = {
     enable = true;
+    package = pkgs.waybar.overrideAttrs (oa: {
+      mesonFlags = (oa.mesonFlags or  [ ]) ++ [ "-Dexperimental=true" ];
+    });
     systemd.enable = true;
     settings = {
       secondary = {
@@ -20,6 +44,103 @@
 
         "wlr/workspaces" = {
           on-click = "activate";
+        };
+      };
+      primary = {
+        mode = "dock";
+        layer = "top";
+        height = 40;
+        margin = "6";
+        position = "top";
+        output = builtins.map (m: m.name) (builtins.filter (m: ! m.noBar) config.monitors);
+
+        modules-left = [
+          "custom/menu"
+        ];
+
+        modules-center = [
+          "cpu"
+          "custom/gpu"
+          "memory"
+          "clock"
+          "pulseaudio"
+          "network"
+        ];
+
+        modules-right = [
+          "tray"
+          "custom/hostname"
+        ];
+
+        cpu = {
+          format = "   {usage}%";
+        };
+        "custom/gpu" = {
+          interval = 5;
+          return-type = "json";
+          exec = jsonOutput "gpu" {
+            text = "$(${cat} /sys/class/drm/card0/device/gpu_busy_percent)";
+            tooltip = "GPU Usage";
+          };
+          format = "󰒋  {}%";
+        };
+        memory = {
+          format = "󰍛  {}%";
+          interval = 5;
+        };
+        clock = {
+          format = "{:%d/%m %H:%M}";
+          tooltip-format = ''
+            <big>{:%Y %B}</big>
+            <tt><small>{calendar}</small></tt>'';
+        };
+        pulseaudio = {
+          format = "{icon}  {volume}%";
+          format-muted = "   0%";
+          format-icons = {
+            headphone = "󰋋";
+            headset = "󰋎";
+            portable = "";
+            default = [ "" "" "" ];
+          };
+          on-click = pavucontrol;
+        };
+        network = {
+          interval = 3;
+          format-wifi = "   {essid}";
+          format-ethernet = "󰈁 Connected";
+          format-disconnected = "";
+          tooltip-format = ''
+            {ifname}
+            {ipaddr}/{cidr}
+            Up: {bandwidthUpBits}
+            Down: {bandwidthDownBits}'';
+          on-click = "";
+        };
+        "custom/menu" = {
+          return-type = "json";
+          exec = jsonOutput "menu" {
+            text = "";
+            tooltip = ''$(${cat} /etc/os-release | ${grep} PRETTY_NAME | ${cut} -d '"' -f2)'';
+          };
+          on-click = "${wofi} -S drun -x 10 -y 10 -W 25% -H 60%";
+        };
+        "custom/hostname" = {
+          exec = "echo $USER@$HOSTNAME";
+        };
+        "custom/player" = {
+          exec-if = "${playerctl} status";
+          exec = ''${playerctl} metadata --format '{"text": "{{artist}} - {{title}}", "alt": "{{status}}", "tooltip": "{{title}} ({{artist}} - {{album}})"}' '';
+          return-type = "json";
+          interval = 2;
+          max-length = 30;
+          format = "{icon} {}";
+          format-icons = {
+            "Playing" = "󰐊";
+            "Paused" = "󰏤 ";
+            "Stopped" = "󰓛";
+          };
+          on-click = "${playerctl} play-pause";
         };
       };
     };
@@ -42,13 +163,13 @@
         opacity: 0.95;
         padding: 0;
         background-color: #${colors.base00};
-        border: 2px solid #${colors.base0C};
+        border: 2px solid #${colors.base04};
         border-radius: 10px;
       }
       window#waybar.bottom {
         opacity: 0.90;
         background-color: #${colors.base00};
-        border: 2px solid #${colors.base0C};
+        border: 2px solid #${colors.base04};
         border-radius: 10px;
       }
 
