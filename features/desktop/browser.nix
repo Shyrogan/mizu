@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  home.packages = with pkgs; [ firefox ];
+  home.packages = with pkgs; [ firefox google-chrome ];
   home.sessionVariables =
     {
       DEFAULT_BROWSER = "${pkgs.firefox}/bin/firefox";

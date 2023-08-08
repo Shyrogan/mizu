@@ -2,7 +2,7 @@
   imports = [
     ./colorscheme.nix
     ./discord.nix
-    ./firefox.nix
+    ./browser.nix
     ./font.nix
     ./gitkraken.nix
     ./kitty.nix
