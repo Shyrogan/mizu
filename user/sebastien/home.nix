@@ -20,10 +20,6 @@
       pkgs.fira-code
     ];
 
-    sessionVariables = {
-      TERMINAL = "kitty";
-    };
-
     persistence = {
       "/persist/home/sebastien" = {
         directories = [
@@ -40,4 +36,5 @@
 
     stateVersion = "23.05";
   };
+  xdg.mime.enable = true;
 }
