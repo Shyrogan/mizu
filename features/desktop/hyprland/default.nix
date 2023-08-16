@@ -32,7 +32,6 @@
 
       input = {
         kb_layout = "fr";
-        sensitivity = "-0.6";
       };
 
       dwindle.split_width_multiplier = 1.35;

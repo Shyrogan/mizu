@@ -163,13 +163,13 @@ in
         opacity: 0.95;
         padding: 0;
         background-color: #${colors.base00};
-        border: 2px solid #${colors.base04};
+        border: 1px solid #${colors.base04};
         border-radius: 10px;
       }
       window#waybar.bottom {
         opacity: 0.90;
         background-color: #${colors.base00};
-        border: 2px solid #${colors.base04};
+        border: 1px solid #${colors.base04};
         border-radius: 10px;
       }
 

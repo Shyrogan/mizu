@@ -1,11 +1,13 @@
-{ inputs, pkgs, ... }:
+{ pkgs, fenix, ... }:
 {
   home.packages = with pkgs; [
-    cargo
-    clippy
-    rustc
-    rustfmt
-    rust-analyzer
-    gcc
+    (fenix.default.withComponents [
+      "cargo"
+      "clippy"
+      "rust-src"
+      "rustc"
+      "rustfmt"
+    ])
+    rust-analyzer-nightly
   ];
 }
